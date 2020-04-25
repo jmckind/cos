@@ -36,7 +36,7 @@ func New() *cobra.Command {
 				cmd.Println(Version)
 				return nil
 			}
-			return cos.Run(&cos.RunOptions{
+			return cos.Execute(&cos.Options{
 				From: from,
 				To:   to,
 			})

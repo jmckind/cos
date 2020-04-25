@@ -20,8 +20,8 @@ import (
 	"strings"
 )
 
-// RunOptions defines the configuration for the operation.
-type RunOptions struct {
+// Options defines the configuration for the operation.
+type Options struct {
 	// From is the name of the resource to copy from.
 	From string `json:"from"`
 
@@ -29,22 +29,22 @@ type RunOptions struct {
 	To string `json:"to"`
 }
 
-// Run will perform the operation.
-func Run(options *RunOptions) error {
-	if err := validate(options); err != nil {
+// Execute will perform the operation.
+func Execute(o *Options) error {
+	if err := validate(o); err != nil {
 		return err
 	}
-	fmt.Println(fmt.Sprintf("copy from %s to %s", options.From, options.To))
+	fmt.Println(fmt.Sprintf("copy from %s to %s", o.From, o.To))
 	return nil
 }
 
 // validate will validate the given options.
-func validate(options *RunOptions) error {
-	if len(strings.TrimSpace(options.From)) <= 0 {
+func validate(o *Options) error {
+	if len(strings.TrimSpace(o.From)) <= 0 {
 		return errors.New("from file is required")
 	}
 
-	if len(strings.TrimSpace(options.To)) <= 0 {
+	if len(strings.TrimSpace(o.To)) <= 0 {
 		return errors.New("to file is required")
 	}
 	return nil
